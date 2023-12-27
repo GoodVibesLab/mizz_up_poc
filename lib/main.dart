@@ -432,7 +432,11 @@ class _MyAppState extends State<MyApp> {
                 ),
                 trailing: ElevatedButton(
                   onPressed: () async {
-                    PlatformService.send(_textController.text);
+                    try {
+                      PlatformService.send(_textController.text);
+                    } on Exception catch (e) {
+                      _showToast(context, e.toString());
+                    }
                     _textController.text = "";
                   },
                   child: const Text("Send"),
