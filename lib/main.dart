@@ -421,6 +421,7 @@ class _MyAppState extends State<MyApp> {
               Text('vid: $vid'),
 
               _connectButton,
+              _sendButton,
 
               ListTile(
                 title: TextField(
@@ -435,7 +436,6 @@ class _MyAppState extends State<MyApp> {
                     try {
                       String data = "${_textController.text}\r\n";
                       await _port?.write(Uint8List.fromList(data.codeUnits));
-
                       _textController.text = "";
                     } on Exception catch (e) {
                       _showToast(context, e.toString());
@@ -467,6 +467,21 @@ class _MyAppState extends State<MyApp> {
         }
       },
       child: const Text("Connect"),
+    );
+  }
+
+  Widget get _sendButton {
+    return ElevatedButton(
+      onPressed: () async {
+        try {
+          String data = "${_textController.text}\r\n";
+          String send = await PlatformService.send(Uint8List.fromList(data.codeUnits));
+          _showToast(context, send);
+        } on Exception catch (e) {
+          _showToast(context, e.toString());
+        }
+      },
+      child: const Text("Send platform"),
     );
   }
 

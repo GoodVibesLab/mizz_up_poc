@@ -9,7 +9,7 @@ class PlatformService {
     return version;
   }
 
-  static Future<String> send(String data) async {
+  static Future<String> send(Uint8List data) async {
     final String result = await _channel.invokeMethod('send', {'data': data});
     return result;
   }
