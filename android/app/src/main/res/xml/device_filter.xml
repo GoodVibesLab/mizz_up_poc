@@ -24,4 +24,6 @@
     <!-- 0x1366 / 0x0105: CH340 JLink -->
     <usb-device vendor-id="1A86" product-id="7523" />
 
+    <usb-device vendor-id="1241" product-id="46436" />
+
 </resources>
